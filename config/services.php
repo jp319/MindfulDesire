@@ -31,4 +31,8 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'cryptojs' => [
+        'key' => env('CRYPTOJS_KEY'),
+    ],
+
 ];

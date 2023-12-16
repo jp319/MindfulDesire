@@ -16,8 +16,18 @@ export default {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
+            colors: {
+                'logo-orange': '#FBB03B',
+                'logo-blue': '#233DFF',
+            }
         },
     },
 
-    plugins: [forms, typography],
+    safelist: [
+        {
+            pattern: /bg-(red|blue|green|yellow|purple)-(500|600)/,
+        },
+    ],
+
+    plugins: [forms, typography, require('@tailwindcss/aspect-ratio')],
 };

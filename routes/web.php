@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,9 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::view('/', 'welcome')->name('welcome');
+Route::get('/blog', [PostController::class, 'index'])->name('blog');
+Route::get('/blog/{post:slug}', [PostController::class, 'show'])->name('blog.show');
 
 Route::middleware([
     'auth:sanctum',
