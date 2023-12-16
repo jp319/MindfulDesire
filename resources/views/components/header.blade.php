@@ -27,15 +27,63 @@
                         <div class="flex flex-col items-start justify-center w-full space-x-6 text-center lg:space-x-8 md:w-2/3 md:mt-0 md:flex-row md:items-center">
                             <a href="{{ route('welcome') }}" class="{{ request()->routeIs('welcome') ? 'text-black' : 'text-gray-700' }} inline-block w-full py-2 mx-0 ml-6 font-medium text-left md:ml-0 md:w-auto md:px-0 hover:text-black md:mx-2 lg:mx-3 md:text-center">Home</a>
                             <a href="{{ route('blog') }}"    class="{{ request()->routeIs('blog')    ? 'text-black' : 'text-gray-700' }} inline-block w-full py-2 mx-0      font-medium text-left md:w-auto md:px-0 md:mx-2 hover:text-black lg:mx-3 md:text-center">Blog</a>
+
+                            @guest
+                                <x-register-and-login-modal />
+                            @endguest
+
+                            @auth
+                                <div x-data="{ modalOpen: false }"
+                                     @keydown.escape.window="modalOpen = false"
+                                     @keydown.window.prevent.ctrl.k="modalOpen = !modalOpen"
+                                     :class="{ 'z-40': modalOpen }" class="relative w-auto h-auto">
+                                    <button @click="modalOpen=true" class="bg-gray-100/[.30] p-2 rounded-full border-2 border-gray-100/[.30] absolute top-0 left-0 hidden py-2 mt-6 ml-10 mr-2 text-gray-600 lg:flex lg:items-center lg:gap-x-2 md:mt-0 md:ml-2 lg:mx-3 md:relative">
+                                        <svg class="inline w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M15 12L12 12M12 12L9 12M12 12L12 9M12 12L12 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path> <path d="M22 12C22 16.714 22 19.0711 20.5355 20.5355C19.0711 22 16.714 22 12 22C7.28595 22 4.92893 22 3.46447 20.5355C2 19.0711 2 16.714 2 12C2 7.28595 2 4.92893 3.46447 3.46447C4.92893 2 7.28595 2 12 2C16.714 2 19.0711 2 20.5355 3.46447C21.5093 4.43821 21.8356 5.80655 21.9449 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path> </g></svg>
+                                        Quick search...<span class="ml-auto pl-3 flex-none text-xs font-semibold">Ctrl K</span>
+                                    </button>
+                                    <template x-teleport="body">
+                                        <div x-show="modalOpen" class="fixed top-0 left-0 z-[99] flex items-center justify-center w-screen h-screen" x-cloak>
+                                            <div x-show="modalOpen"
+                                                 x-transition:enter="ease-out duration-300"
+                                                 x-transition:enter-start="opacity-0"
+                                                 x-transition:enter-end="opacity-100"
+                                                 x-transition:leave="ease-in duration-300"
+                                                 x-transition:leave-start="opacity-100"
+                                                 x-transition:leave-end="opacity-0"
+                                                 @click="modalOpen=false" class="absolute inset-0 w-full h-full bg-white backdrop-blur-sm bg-opacity-70"></div>
+                                            <div x-show="modalOpen"
+                                                 x-trap.inert.noscroll="modalOpen"
+                                                 x-transition:enter="ease-out duration-300"
+                                                 x-transition:enter-start="opacity-0 -translate-y-2 sm:scale-95"
+                                                 x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
+                                                 x-transition:leave="ease-in duration-200"
+                                                 x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
+                                                 x-transition:leave-end="opacity-0 -translate-y-2 sm:scale-95"
+                                                 class="relative w-full mt-32 mb-auto py-1 bg-white border shadow-lg px-1 border-neutral-200 sm:max-w-lg sm:rounded-lg">
+                                                <div class="flex items-center justify-between p-1">
+                                                    <div class="relative">
+                                                        <svg class="pointer-events-none absolute left-4 top-3.5 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                                            <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clip-rule="evenodd" />
+                                                        </svg>
+                                                        <input type="text" class="h-12 w-full border-0 bg-transparent pl-11 pr-4 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm" placeholder="Search..." role="combobox" aria-expanded="false" aria-controls="options">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </template>
+                                </div>
+                            @endauth
+
                             {{--
                             <div x-data="{ modalOpen: false }"
                                  @keydown.escape.window="modalOpen = false"
                                  @keydown.window.prevent.ctrl.k="modalOpen = !modalOpen"
-                                 :class="{ 'z-40': modalOpen }" class="relative w-auto h-auto">
+                                 :class="{ 'z-50': modalOpen }" class="relative w-auto h-auto">
                                 <button @click="modalOpen=true" class="bg-gray-100/[.30] p-2 rounded-full border-2 border-gray-100/[.30] absolute top-0 left-0 hidden py-2 mt-6 ml-10 mr-2 text-gray-600 lg:flex lg:items-center lg:gap-x-2 md:mt-0 md:ml-2 lg:mx-3 md:relative">
-                                    <svg class="inline w-5 h-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                                    Quick search...<span class="ml-auto pl-3 flex-none text-xs font-semibold">Ctrl K</span>
+                                    <svg class="inline w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M9 12H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M12 9L12 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2"></path></g></svg>
+                                    Upload Post<span class="ml-auto pl-3 flex-none text-xs font-semibold">Ctrl K</span>
                                 </button>
+
                                 <template x-teleport="body">
                                     <div x-show="modalOpen" class="fixed top-0 left-0 z-[99] flex items-center justify-center w-screen h-screen" x-cloak>
                                         <div x-show="modalOpen"
@@ -68,45 +116,7 @@
                                 </template>
                             </div>
                             --}}
-                            <div x-data="{ modalOpen: false }"
-                                 @keydown.escape.window="modalOpen = false"
-                                 @keydown.window.prevent.ctrl.k="modalOpen = !modalOpen"
-                                 :class="{ 'z-50': modalOpen }" class="relative w-auto h-auto">
-                                <button @click="modalOpen=true" class="bg-gray-100/[.30] p-2 rounded-full border-2 border-gray-100/[.30] absolute top-0 left-0 hidden py-2 mt-6 ml-10 mr-2 text-gray-600 lg:flex lg:items-center lg:gap-x-2 md:mt-0 md:ml-2 lg:mx-3 md:relative">
-                                    <svg class="inline w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M9 12H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M12 9L12 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2"></path></g></svg>
-                                    Upload Post<span class="ml-auto pl-3 flex-none text-xs font-semibold">Ctrl K</span>
-                                </button>
-                                <template x-teleport="body">
-                                    <div x-show="modalOpen" class="fixed top-0 left-0 z-[99] flex items-center justify-center w-screen h-screen" x-cloak>
-                                        <div x-show="modalOpen"
-                                             x-transition:enter="ease-out duration-300"
-                                             x-transition:enter-start="opacity-0"
-                                             x-transition:enter-end="opacity-100"
-                                             x-transition:leave="ease-in duration-300"
-                                             x-transition:leave-start="opacity-100"
-                                             x-transition:leave-end="opacity-0"
-                                             @click="modalOpen=false" class="absolute inset-0 w-full h-full bg-white backdrop-blur-sm bg-opacity-70"></div>
-                                        <div x-show="modalOpen"
-                                             x-trap.inert.noscroll="modalOpen"
-                                             x-transition:enter="ease-out duration-300"
-                                             x-transition:enter-start="opacity-0 -translate-y-2 sm:scale-95"
-                                             x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
-                                             x-transition:leave="ease-in duration-200"
-                                             x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
-                                             x-transition:leave-end="opacity-0 -translate-y-2 sm:scale-95"
-                                             class="relative w-full mt-32 mb-auto py-1 bg-white border shadow-lg px-1 border-neutral-200 sm:max-w-lg sm:rounded-lg">
-                                            <div class="flex items-center justify-between p-1">
-                                                <div class="relative">
-                                                    <svg class="pointer-events-none absolute left-4 top-3.5 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                                        <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clip-rule="evenodd" />
-                                                    </svg>
-                                                    <input type="text" class="h-12 w-full border-0 bg-transparent pl-11 pr-4 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm" placeholder="Search..." role="combobox" aria-expanded="false" aria-controls="options">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </template>
-                            </div>
+
                         </div>
                         <div class="flex flex-col items-start justify-end w-full pt-4 md:items-center md:w-1/3 md:flex-row md:py-0">
                             <a href="#" class="w-full px-6 py-2 mr-0 text-gray-700 md:px-3 md:mr-2 lg:mr-3 md:w-auto">Sign In</a>
