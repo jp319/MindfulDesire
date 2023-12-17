@@ -1,28 +1,25 @@
-<div
-    x-data="{ registerModal: false, loginModal: false }"
-    x-init="
-    $watch('registerModal', function(value){
+<div class="flex flex-col w-full justify-center sm:justify-end sm:flex-row"
+     x-data="{ registerModal: false, loginModal: false }"
+     x-init=
+     "
+        $watch('registerModal', function(value){
+                if(value === true){
+                    document.body.classList.add('overflow-hidden');
+                }else{
+                    document.body.classList.remove('overflow-hidden');
+                }
+        });
+        $watch('loginModal', function(value){
             if(value === true){
                 document.body.classList.add('overflow-hidden');
             }else{
                 document.body.classList.remove('overflow-hidden');
             }
-    });
-    $watch('loginModal', function(value){
-        if(value === true){
-            document.body.classList.add('overflow-hidden');
-        }else{
-            document.body.classList.remove('overflow-hidden');
-        }
-    });
-    "
-{{--    @keydown.window.prevent.escape="registerModal=false; loginModal=false"--}}
-    @keydown.window.prevent.ctrl.k="registerModal=!registerModal"
+        });
+     "
 >
-    <button @click="registerModal=true" class="bg-gray-100/[.30] p-2 rounded-full border-2 border-gray-100/[.30] absolute top-0 left-0 hidden py-2 mt-6 ml-10 mr-2 text-gray-600 lg:flex lg:items-center lg:gap-x-2 md:mt-0 md:ml-2 lg:mx-3 md:relative">
-        <svg class="inline w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M15 12L12 12M12 12L9 12M12 12L12 9M12 12L12 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path> <path d="M22 12C22 16.714 22 19.0711 20.5355 20.5355C19.0711 22 16.714 22 12 22C7.28595 22 4.92893 22 3.46447 20.5355C2 19.0711 2 16.714 2 12C2 7.28595 2 4.92893 3.46447 3.46447C4.92893 2 7.28595 2 12 2C16.714 2 19.0711 2 20.5355 3.46447C21.5093 4.43821 21.8356 5.80655 21.9449 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path> </g></svg>
-        Upload Post<span class="ml-auto pl-3 flex-none text-xs font-semibold">Ctrl K</span>
-    </button>
+    <button @click="loginModal = true" class="px-6 py-2 mr-0 text-gray-700 md:px-3 md:mr-2 lg:mr-3 md:w-auto">Sign In</button>
+    <button @click="registerModal = true" class="inline-flex items-center px-5 px-6 py-3 text-sm font-medium leading-4 text-white bg-gray-900 md:w-auto md:rounded-full hover:bg-gray-800 focus:outline-none md:focus:ring-2 focus:ring-0 focus:ring-offset-2 focus:ring-gray-800 justify-center">Sign Up</button>
 
     {{-- ------------------ Register Modal ------------------ --}}
     <template x-teleport="body">

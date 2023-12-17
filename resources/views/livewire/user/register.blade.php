@@ -6,6 +6,33 @@
             <label for="email" class="sr-only">Email</label>
             <input wire:model.blur="form.email" id="email" type="email" placeholder="name@example.com" class="flex w-full h-10 px-3 py-2 text-sm bg-white border rounded-md border-neutral-300 ring-offset-background placeholder:text-neutral-500 focus:border-neutral-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-400 disabled:cursor-not-allowed disabled:opacity-50">
 
+            <div class="flex w-full items-center relative gap-x-2">
+                <label for="city" class="sr-only">City</label>
+                <input wire:model.blur="form.city" id="city" type="text" placeholder="city" class="flex w-full h-10 px-3 py-2 text-sm bg-white border rounded-md border-neutral-300 ring-offset-background placeholder:text-neutral-500 focus:border-neutral-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-400 disabled:cursor-not-allowed disabled:opacity-50">
+                <label for="country" class="sr-only">Country</label>
+                <input wire:model.blur="form.country" id="country" type="text" placeholder="country" class="flex w-full h-10 px-3 py-2 text-sm bg-white border rounded-md border-neutral-300 ring-offset-background placeholder:text-neutral-500 focus:border-neutral-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-400 disabled:cursor-not-allowed disabled:opacity-50">
+            </div>
+
+            <label for="birthdate" class="sr-only">Birthdate</label>
+            <input wire:model.blur="form.birthdate" id="birthdate" type="date" placeholder="birthdate" class="flex w-full h-10 px-3 py-2 text-sm bg-white border rounded-md border-neutral-300 ring-offset-background placeholder:text-neutral-500 focus:border-neutral-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-400 disabled:cursor-not-allowed disabled:opacity-50">
+
+
+
+            <div class="w-full">
+                <label for="about_me" class="sr-only">Birthdate</label>
+                <textarea x-data="{ resize () { $el.style.height = '0px'; $el.style.height = $el.scrollHeight + 'px' } }"
+                          x-init="resize()"
+                          @input="resize()"
+                          type="text"
+                          id="about_me"
+                          wire:model.blur="form.about_me"
+                          placeholder="tell us a bit about yourself..."
+                          class="flex w-full h-auto min-h-[40px] px-3 py-2 text-sm bg-white border rounded-md border-neutral-300 ring-offset-background placeholder:text-neutral-400 focus:border-neutral-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-400 disabled:cursor-not-allowed disabled:opacity-50"
+                ></textarea>
+            </div>
+
+
+
             <div class="flex w-full items-center relative" x-data="{ show: false }">
                 <label for="password" class="sr-only">Password</label>
                 <input wire:model.blur="form.password" id="password" type="password" :type="show ? 'text' : 'password'" name="password" placeholder="password" class="flex w-full h-10 px-3 py-2 pr-8 text-sm bg-white border rounded-md border-neutral-300 ring-offset-background placeholder:text-neutral-500 focus:border-neutral-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-400 disabled:cursor-not-allowed disabled:opacity-50">

@@ -10,7 +10,7 @@
     <div class="mx-auto max-w-7xl pt-4 w-full">
 
         <nav class="relative z-50 h-24 select-none bg-gray-200/50 backdrop-blur-2xl rounded-full px-4" x-data="{ showMenu: false }" x-init="window.addEventListener('resize', function() { if (showMenu) { showMenu=window.innerWidth < 768; } });  ">
-            <div class="container relative flex flex-wrap items-center justify-between h-24 mx-auto overflow-hidden font-medium border-b border-gray-200 rounded-full md:overflow-visible lg:justify-center sm:px-4 md:px-2 lg:px-0">
+            <div class="container relative flex flex-wrap items-center justify-between h-24 mx-auto overflow-hidden font-medium rounded-full md:overflow-visible lg:justify-center sm:px-4 md:px-2 lg:px-0">
                 <div class="flex items-center justify-start w-1/4 h-full pr-4">
                     <a href="{{ route('welcome') }}#home" class="flex items-center py-4 space-x-1 font-extrabold text-gray-900 md:py-0">
                         <span class="flex items-center justify-center w-14 h-14 text-white rounded-full">
@@ -118,9 +118,25 @@
                             --}}
 
                         </div>
-                        <div class="flex flex-col items-start justify-end w-full pt-4 md:items-center md:w-1/3 md:flex-row md:py-0">
-                            <a href="#" class="w-full px-6 py-2 mr-0 text-gray-700 md:px-3 md:mr-2 lg:mr-3 md:w-auto">Sign In</a>
-                            <a href="#_" class="inline-flex items-center w-full px-5 px-6 py-3 text-sm font-medium leading-4 text-white bg-gray-900 md:w-auto md:rounded-full hover:bg-gray-800 focus:outline-none md:focus:ring-2 focus:ring-0 focus:ring-offset-2 focus:ring-gray-800">Sign Up</a>
+                        <div class="flex flex-col items-start justify-end w-full md:items-center md:w-1/3 md:flex-row md:py-0">
+                            @guest
+                                <x-register-or-login-modal />
+                            @endguest
+                            @auth
+                                <div class="w-full px-2 py-2 flex justify-start sm:justify-end">
+                                    <a href="{{ route('profile') }}" class="group block flex-shrink-0">
+                                        <div class="flex flex-row-reverse items-center sm:flex-row">
+                                            <div>
+                                                <p class="text-sm font-medium text-gray-700 group-hover:text-gray-900 text-left sm:text-right">{{ auth()->user()->name }}</p>
+                                                <p class="text-xs font-medium text-gray-500 group-hover:text-gray-700 text-left sm:text-right">View profile</p>
+                                            </div>
+                                            <div class="mr-3 sm:ml-3">
+                                                <img class="inline-block h-14 w-14 rounded-full" src="{{ auth()->user()->profile_photo_url }}" alt="">
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            @endauth
                         </div>
                     </div>
                 </div>

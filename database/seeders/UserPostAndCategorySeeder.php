@@ -20,9 +20,15 @@ class UserPostAndCategorySeeder extends Seeder
         $faker = Faker::create();
         $user = User::factory()
             ->create([
-                'name' => 'Johnfritz P. Antipuesto',
+                'name' => CryptoJsAesEncryptionService::autoEncrypt('Johnfritz P. Antipuesto'),
                 'email' => 'jpantipuesto00104@usep.edu.ph',
                 'password' => bcrypt('password'),
+                'about_me' => CryptoJsAesEncryptionService::autoEncrypt(
+                    'I am a web developer and an IT student at the University of Southeastern Philippines.'
+                ),
+                'city' => CryptoJsAesEncryptionService::autoEncrypt('Tagum City'),
+                'country' => CryptoJsAesEncryptionService::autoEncrypt('Philippines'),
+                'birthdate' => CryptoJsAesEncryptionService::autoEncrypt('2001-01-04'),
             ]);
         $posts_data = [
             [
