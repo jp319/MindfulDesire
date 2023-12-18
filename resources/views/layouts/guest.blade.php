@@ -19,7 +19,7 @@
         @livewireStyles
     </head>
     <body class="relative bg-gray-200/50">
-        <div {{ $attributes([ 'class' => 'font-sans text-gray-900 antialiased' ]) }} >
+        <div {{ $attributes([ 'class' => 'font-sans text-gray-900 antialiased min-h-screen' ]) }} >
             {{ $slot }}
         </div>
 
@@ -27,5 +27,6 @@
 
         <div class="absolute inset-0 -z-20 h-full w-full bg-white [background:radial-gradient(125%_125%_at_50%_10%,#fff_40%,#63e_100%)]"></div>
         @livewireScripts
+        <fc:scripts />
     </body>
 </html>

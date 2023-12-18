@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
 
@@ -24,6 +25,7 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::view('/profile', 'profile')->name('profile');
+    Route::get('/profile', [ProfileController::class, 'show'])->name('profile');
+    Route::get('/profile/posts', [ProfileController::class, 'index'])->name('profile.posts');
     Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 });

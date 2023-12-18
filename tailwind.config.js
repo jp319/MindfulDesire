@@ -9,6 +9,7 @@ export default {
         './vendor/laravel/jetstream/**/*.blade.php',
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
+        "./node_modules/tw-elements/dist/js/**/*.js"
     ],
 
     theme: {
@@ -28,6 +29,6 @@ export default {
             pattern: /bg-(red|blue|green|yellow|purple)-(500|600)/,
         },
     ],
-
-    plugins: [forms, typography, require('@tailwindcss/aspect-ratio')],
+    darkMode: "class",
+    plugins: [forms, typography, require('@tailwindcss/aspect-ratio'), require("tw-elements/dist/plugin.cjs")],
 };

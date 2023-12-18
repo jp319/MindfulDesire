@@ -7,7 +7,7 @@
             <div class="grid gap-8 md:grid-cols-2 lg:gap-12">
                 <div>
                     <div class="h-24 overflow-hidden rounded-lg bg-gray-100 shadow-lg md:h-[80vh]">
-                        <img src="https://images.unsplash.com/photo-1610465299996-30f240ac2b1c?auto=format&q=75&fit=crop&w=600&h=750" loading="lazy" alt="Photo by Martin Sanchez" class="h-full w-full object-cover object-center" />
+                        <img src="{{ asset('storage/'.$post->image) }}" loading="lazy" alt="Photo by Martin Sanchez" class="h-full w-full object-cover object-center" />
                     </div>
                 </div>
 

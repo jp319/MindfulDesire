@@ -4,7 +4,7 @@ namespace App\Services;
 
 use App\Models\Post;
 
-class UniquePostSlugGeneratorService
+class PostHelperService
 {
     /**
      * Generate a unique slug for the post.
@@ -26,5 +26,14 @@ class UniquePostSlugGeneratorService
         } while (in_array($slug, $slugs));
 
         return $slug;
+    }
+    /**
+     * Generate an excerpt for the post.
+     * @param string $body
+     * @return string
+     */
+    public static function generateExcerpt(string $body): string
+    {
+        return \Str::limit($body, Post::EXCERPT_LENGTH);
     }
 }

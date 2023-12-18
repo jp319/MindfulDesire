@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
@@ -21,28 +22,13 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::orderBy('published_at', 'desc')
+            ->where('published', true)
             ->filter(request(['search']))->get();
             //->paginate(6)         // Livewire will handle
             //->withQueryString();  // the pagination.
-        return view('blog', compact('posts'));
+        $categories = Category::all();
+        return view('blog', compact('posts', 'categories'));
     }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
     /**
      * This method is responsible for displaying a specific post.
      * It fetches all posts from the database and then loops through them to find the post with the matching slug.
@@ -75,33 +61,13 @@ class PostController extends Controller
         // If the post is not found, abort the request with a 404 error.
         if (!$post) {
             abort(404);
+        } elseif (!$post->published && !auth()->user()->id === $post->author->id) {
+            // If the post is not published, abort the request with a 403 error.
+            // Note: Only the author of the post can view the post if it is not published.
+            abort(403);
         }
 
         // Return the view that displays the post.
         return view('post', compact('post'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
     }
 }

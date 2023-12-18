@@ -1,11 +1,10 @@
 <x-guest-layout>
     <x-header />
 
-    @php
-        $user = auth()->user();
-    @endphp
-
-    <div class="p-16">
+    <div class="absolute top-0">
+        <img src="https://picsum.photos/1920/1080" alt="Cover Image">
+    </div>
+    <div class="p-16 relative">
         <div class="p-8 bg-white shadow mt-24">
             <div class="grid grid-cols-1 md:grid-cols-3">
                 <div class="grid grid-cols-3 text-center order-last md:order-first mt-20 md:mt-0">

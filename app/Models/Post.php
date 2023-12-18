@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class Post extends Model
 {
     use HasFactory;
+    public const EXCERPT_LENGTH = 200;
     protected $table = 'posts';
     /**
      * The attributes that are mass assignable.
@@ -101,6 +102,18 @@ class Post extends Model
     public function getExcerptAttribute(): string
     {
         return CryptoJsAesEncryptionService::autoDecrypt($this->attributes['excerpt']);
+    }
+    /**
+     * Get the decrypted excerpt attribute.
+     *
+     * This method is an accessor for the 'image' attribute.
+     * It uses the CryptoJsAesEncryptionService to automatically decrypt the 'image' attribute.
+     *
+     * @return string The decrypted image path.
+     */
+    public function getImageAttribute(): string
+    {
+        return CryptoJsAesEncryptionService::autoDecrypt($this->attributes['image']);
     }
     /**
      * Apply filters to the query.
