@@ -1,8 +1,9 @@
 <x-guest-layout>
     <x-header />
 
-    <div class="absolute top-0">
-        <img src="https://picsum.photos/1920/1080" alt="Cover Image">
+    <div class="absolute top-0 w-full"
+    >
+{{--        <img src="{{ asset('storage/mindful-desire/cover.jpg') }}" alt="Cover Image">--}}
     </div>
     <div class="p-16 relative">
         <div class="p-8 bg-white shadow mt-24">
