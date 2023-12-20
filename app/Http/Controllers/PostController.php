@@ -23,7 +23,7 @@ class PostController extends Controller
     {
         $posts = Post::orderBy('published_at', 'desc')
             ->where('published', true)
-            ->filter(request(['search']))->get();
+            ->filter(request(['search', 'author']))->get();
             //->paginate(6)         // Livewire will handle
             //->withQueryString();  // the pagination.
         $categories = Category::all();

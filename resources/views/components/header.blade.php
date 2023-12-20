@@ -333,6 +333,12 @@
                             <a href="{{ route('welcome') }}" class="{{ request()->routeIs('welcome') ? 'text-black' : 'text-gray-700' }} inline-block w-full py-2 mx-0 ml-6 font-medium text-left md:ml-0 md:w-auto md:px-0 hover:text-black md:mx-2 lg:mx-3 md:text-center">Home</a>
                             <a href="{{ route('blog') }}" class="{{ request()->routeIs('blog')    ? 'text-black' : 'text-gray-700' }} inline-block w-full py-2 mx-0      font-medium text-left md:w-auto md:px-0 md:mx-2 hover:text-black lg:mx-3 md:text-center">Blog</a>
                             <a href="{{ route('profile.posts') }}" class="{{ request()->routeIs('profile.posts')    ? 'text-black' : 'text-gray-700' }} inline-block w-full py-2 mx-0      font-medium text-left md:w-auto md:px-0 md:mx-2 hover:text-black lg:mx-3 md:text-center">My Posts</a>
+                            <a href="{{ route('welcome') }}" class="{{ request()->routeIs('welcome') ? 'text-black' : 'text-gray-700' }} inline-block w-full py-2 mx-0 ml-6 font-medium text-left md:ml-0 md:w-auto md:px-0 hover:text-black md:mx-2 lg:mx-3 md:text-center">Home</a>
+                            <a href="{{ route('blog') }}" class="{{ request()->routeIs('blog')    ? 'text-black' : 'text-gray-700' }} inline-block w-full py-2 mx-0      font-medium text-left md:w-auto md:px-0 md:mx-2 hover:text-black lg:mx-3 md:text-center">Blog</a>
+
+                            @auth
+                            <a href="{{ route('profile.posts') }}" class="{{ request()->routeIs('profile.posts')    ? 'text-black' : 'text-gray-700' }} inline-block w-full py-2 mx-0      font-medium text-left md:w-auto md:px-0 md:mx-2 hover:text-black lg:mx-3 md:text-center">My Posts</a>
+                            @endauth
 
                             @guest
                             <x-register-and-login-modal />

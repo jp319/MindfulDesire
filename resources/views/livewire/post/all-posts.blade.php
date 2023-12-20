@@ -4,14 +4,18 @@
     @endphp
 
     <section class="bg-transparent">
-        <div class="w-full px-5 py-6 mx-auto space-y-5 sm:py-8 md:py-12 sm:space-y-8 md:space-y-16 max-w-7xl">
+        <div class="w-full px-5 py-6 mx-auto space-y-5 sm:py-4 md:py-6 sm:space-y-4 md:space-y-8 max-w-7xl">
             <div class="flex grid grid-cols-12 pb-10 sm:px-5 gap-x-8 gap-y-16">
                 @if($post_count > 0)
                     @foreach($posts as $post)
                         <!-- Small -->
                         <div class="flex flex-col items-start col-span-12 space-y-3 sm:col-span-6 xl:col-span-4 relative">
-                            <a href="{{ route('blog.show', ['post' => $post->slug]) }}" class="block">
-                                <img class="object-cover w-full mb-2 overflow-hidden rounded-lg shadow-sm max-h-56" src="https://cdn.devdojo.com/images/may2021/fruit.jpg" alt="{{ $post->title }}">
+                            <a href="{{ route('blog.show', ['post' => $post->slug]) }}" class="block relative">
+                                <img
+                                    class="absolute inset-0 -z-10 object-cover w-full mb-2 overflow-hidden rounded-lg shadow-sm max-h-56 blur-md"
+                                    src="{{ asset('storage/'.$post->image) }}" loading="lazy"
+                                    alt="Photo by {{ $post->author->name }}">
+                                <img class="object-cover w-full mb-2 overflow-hidden rounded-lg shadow-sm max-h-56" src="{{ asset('storage/'.$post->image) }}" loading="lazy" alt="Photo by {{ $post->author->name }}">
                             </a>
                             <div class="w-full flex flex-wrap gap-2">
                                 @forelse($post->categories as $category)
@@ -26,7 +30,7 @@
                             </div>
                             <h2 class="text-lg font-bold sm:text-xl md:text-2xl"><a href="{{ route('blog.show', ['post' => $post->slug]) }}">{{ $post->title }}</a></h2>
                             <p class="text-sm text-gray-500">{{ $post->excerpt }}</p>
-                            <p class="pt-2 text-xs font-medium"><a href="#_" class="mr-1 underline">{{ $post->author->name }}</a> · <span class="mx-1">{{ \App\Services\DateService::formatPublishedAtDate($post->published_at) }}</span> · <span class="mx-1 text-gray-600">3 min. read</span></p>
+                            <p class="pt-2 text-xs font-medium"><a href="{{ route('blog') }}?author={{ $post->author->id }}" class="mr-1 underline">{{ $post->author->name }}</a> · <span class="mx-1">{{ \App\Services\DateService::formatPublishedAtDate($post->published_at) }}</span> · <span class="mx-1 text-gray-600">3 min. read</span></p>
                         </div>
                         <!-- Small -->
                     @endforeach

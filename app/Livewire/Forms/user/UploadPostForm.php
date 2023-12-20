@@ -31,7 +31,7 @@ class UploadPostForm extends Form
         $this->validate();
         $image_path = $this->image->storeAs(
             "posts",
-            $this->image->getClientOriginalName(),
+            \Str::random().'-'.'('.time().')'.'['.auth()->user()->id.']' . $this->image->getClientOriginalName(),
             'public'
         );
         $post = Post::create([
