@@ -210,7 +210,7 @@ class MyPosts extends Component
         $posts = Post::whereIn('id', $this->post_ids)
             ->where('user_id', $this->user->id)
             //->where('published', true)
-            ->oldest()
+            ->latest()
             ->paginate($this->post_per_page);
         $remaining_posts = count($this->post_ids);
 

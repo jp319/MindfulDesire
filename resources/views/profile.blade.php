@@ -1,11 +1,13 @@
 <x-guest-layout>
     <x-header />
 
-    <div class="absolute top-0 w-full"
+    <div class="absolute top-0 w-full -z-10 bg-cover bg-no-repeat bg-center h-full"
+         style="background-image: url({{ asset('storage/mindful-desire/cover.jpg') }});"
     >
 {{--        <img src="{{ asset('storage/mindful-desire/cover.jpg') }}" alt="Cover Image">--}}
     </div>
-    <div class="p-16 relative">
+    <div class="absolute top-0 pt-60 w-full h-full bg-gradient-to-b from-transparent via-slate-100 to-slate-200"></div>
+    <div class="p-16 relative max-w-screen-xl mx-auto">
         <div class="p-8 bg-white shadow mt-24">
             <div class="grid grid-cols-1 md:grid-cols-3">
                 <div class="grid grid-cols-3 text-center order-last md:order-first mt-20 md:mt-0">

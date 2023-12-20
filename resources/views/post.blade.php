@@ -2,12 +2,18 @@
 
     <x-header sticky="{{ false }}" />
 
+    @if($post->author->id == auth()->user()->id)
+
+        <livewire:user.my-post :post="$post" />
+
+    @endif
+
     <div class="bg-transparent py-6 sm:py-8 lg:pt-6 lg:pb-12">
         <div class="mx-auto max-w-screen-xl px-4 md:px-8">
             <div class="grid gap-8 md:grid-cols-2 lg:gap-12">
                 <div>
                     <div class="h-24 overflow-hidden rounded-lg bg-gray-100 shadow-lg md:h-[80vh]">
-                        <img src="{{ asset('storage/'.$post->image) }}" loading="lazy" alt="Photo by Martin Sanchez" class="h-full w-full object-cover object-center" />
+                        <img src="{{ asset('storage/'.$post->image) }}" loading="lazy" alt="Photo by {{ $post->author->name }}" class="h-full w-full object-cover object-center" />
                     </div>
                 </div>
 

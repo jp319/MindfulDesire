@@ -22,8 +22,6 @@
                         <li class="mb-2"><span class="text-green-500">✔</span> Connect with like-minded users.</li>
                         <li class="mb-2"><span class="text-green-500">✔</span> Discover inspiring stories and ideas.</li>
                     </ul>
-                    <button class="mt-6 px-6 py-2 bg-blue-500 text-white rounded-md shadow-md hover:bg-blue-600"
-                    >Get Started</button>
                 </div>
             </div>
         </div>

@@ -30,6 +30,7 @@ class Post extends Model
         'published_at',
     ];
     protected $casts = [
+        'published' => 'boolean',
         'published_at' => 'datetime',
     ];
     /**
@@ -129,13 +130,19 @@ class Post extends Model
      * @param array $filters The filters to apply to the query.
      * @return void
      */
-    public function scopeFilter($query, array $filters): void
+    public function scopeFilter(Builder $query, array $filters): void
     {
         $query->when($filters['search'] ?? false, function ($query, $search) {
             $query->where(function ($query) use ($search) {
                 $query->where('title', 'like', '%' . $search . '%')
                     ->orWhere('body', 'like', '%' . $search . '%')
-                    ->orWhere('excerpt', 'like', '%' . $search . '%');
+                    ->orWhere('excerpt', 'like', '%' . $search . '%')
+                    ->orWhere('user_id', 'like', '%' . $search . '%');
+            });
+        });
+        $query->when($filters['author'] ?? false, function ($query, $search) {
+            $query->where(function ($query) use ($search) {
+                $query->where('user_id', 'like', '%' . $search . '%');
             });
         });
     }
