@@ -20,7 +20,7 @@ class CryptoJsAesEncryptionService
      * @param string $passphrase Your password
      * @return string
      */
-    private static function encrypt($value, string $passphrase)
+    private static function encrypt(mixed $value, string $passphrase): string
     {
         $salt = openssl_random_pseudo_bytes(8);
         $salted = '';
@@ -38,23 +38,23 @@ class CryptoJsAesEncryptionService
 
     /**
      * Decrypt a previously encrypted value
-     * @param string $jsonStr Json stringified value
+     * @param string $jsonStr Json stringifies value
      * @param string $passphrase Your password
      * @return mixed
      */
-    private static function decrypt(string $jsonStr, string $passphrase)
+    private static function decrypt(string $jsonStr, string $passphrase): mixed
     {
         $json = json_decode($jsonStr, true);
         $salt = hex2bin($json["s"]);
         $iv = hex2bin($json["iv"]);
         $ct = base64_decode($json["ct"]);
-        $concatedPassphrase = $passphrase . $salt;
+        $concatPassphrase = $passphrase . $salt;
         $md5 = [];
-        $md5[0] = md5($concatedPassphrase, true);
+        $md5[0] = md5($concatPassphrase, true);
         $result = $md5[0];
         $i = 1;
         while (strlen($result) < 32) {
-            $md5[$i] = md5($md5[$i - 1] . $concatedPassphrase, true);
+            $md5[$i] = md5($md5[$i - 1] . $concatPassphrase, true);
             $result .= $md5[$i];
             $i++;
         }
@@ -63,7 +63,7 @@ class CryptoJsAesEncryptionService
         return json_decode($data, true);
     }
 
-    public static function autoEncrypt($value)
+    public static function autoEncrypt($value): string
     {
         return self::encrypt($value, config('services.cryptojs.key'));
     }
