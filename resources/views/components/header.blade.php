@@ -130,7 +130,7 @@
                                 </g>
                             </svg>
                         </span>
-                        <span class="text-logo-orange">Mindful</span><span class="text-logo-blue">Desire</span>
+                        <span class="text-logo-orange">Mindful</span><span class="text-logo-blue">Desires</span>
                     </a>
                 </div>
                 <div class="top-0 left-0 items-start hidden w-full h-full p-4 text-sm bg-gray-900 bg-opacity-50 md:items-center md:w-3/4 md:absolute lg:text-base md:bg-transparent md:p-0 md:relative md:flex" :class="{'flex fixed top-0 h-screen w-screen pt-4 px-6 -mt-4 -ml-6': showMenu, 'hidden': !showMenu }" x-trap.noscroll="showMenu">
