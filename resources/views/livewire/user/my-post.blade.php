@@ -132,9 +132,9 @@
                                                         }
                                                     "
                                                 x-init=
-                                                    "
-                                                        select.setValue('0');
-                                                    "
+                                                    '
+                                                        select.setValue(@json($selected_categories));
+                                                    '
                                                 data-te-select-filter="true"
                                                 data-te-select-placeholder="Categories"
                                                 multiple

@@ -1,6 +1,24 @@
 <x-guest-layout>
     <x-header/>
 
+    {{--
+    <form class="flex flex-col md:flex-row gap-3">
+        <div class="flex">
+            <input type="text" placeholder="Search for the tool you like"
+                   class="w-full md:w-80 px-3 h-10 rounded-l border-2 border-sky-500 focus:outline-none focus:border-sky-500"
+            >
+            <button type="submit" class="bg-sky-500 text-white rounded-r px-2 md:px-3 py-0 md:py-1">Search</button>
+        </div>
+        <select id="pricingType" name="pricingType"
+                class="w-full h-10 border-2 border-sky-500 focus:outline-none focus:border-sky-500 text-sky-500 rounded px-2 md:px-3 py-0 md:py-1 tracking-wider">
+            <option value="All" selected="">All</option>
+            <option value="Freemium">Freemium</option>
+            <option value="Free">Free</option>
+            <option value="Paid">Paid</option>
+        </select>
+    </form>
+    --}}
+
     @php
         $post_count = $posts->count();
         $has_post = $post_count > 0;
@@ -60,6 +78,21 @@
                                 </svg>
                                 <span>Newest</span>
                             </div>
+
+                            <div class="w-full flex flex-wrap gap-2">
+                                @forelse($post->categories as $category)
+                                    <div class="flex items-center px-3 py-1.5 leading-none rounded-full text-xs font-medium uppercase text-white inline-block"
+                                         style="background-color: {{ $category->color }};"
+                                    >
+                                        <span>{{ $category->name }}</span>
+                                    </div>
+                                @empty
+                                    <div class="bg-gray-500 flex items-center px-3 py-1.5 leading-none rounded-full text-xs font-medium uppercase text-white inline-block">
+                                        <span>Uncategorized</span>
+                                    </div>
+                                @endforelse
+                            </div>
+
                             <h1 class="text-4xl font-bold leading-none lg:text-5xl xl:text-6xl"><a
                                     href="{{ route('blog.show', ['post' => $post->slug]) }}">{{ $post->title }}</a></h1>
                             <p class="pt-2 text-sm font-medium">by <a
@@ -125,10 +158,21 @@
                                      src="{{ asset('storage/'.$post->image) }}" loading="lazy"
                                      alt="Photo by {{ $post->author->name }}">
                             </a>
-                            <div
-                                class="bg-purple-500 flex items-center px-3 py-1.5 leading-none rounded-full text-xs font-medium uppercase text-white inline-block">
-                                <span>Lifestyle</span>
+
+                            <div class="w-full flex flex-wrap gap-2">
+                                @forelse($post->categories as $category)
+                                    <div class="flex items-center px-3 py-1.5 leading-none rounded-full text-xs font-medium uppercase text-white inline-block"
+                                         style="background-color: {{ $category->color }};"
+                                    >
+                                        <span>{{ $category->name }}</span>
+                                    </div>
+                                @empty
+                                    <div class="bg-gray-500 flex items-center px-3 py-1.5 leading-none rounded-full text-xs font-medium uppercase text-white inline-block">
+                                        <span>Uncategorized</span>
+                                    </div>
+                                @endforelse
                             </div>
+
                             <h2 class="text-lg font-bold sm:text-xl md:text-2xl"><a
                                     href="{{ route('blog.show', ['post' => $post->slug]) }}">{{ $post->title }}</a></h2>
                             <p class="text-sm text-gray-500">{{ $post->excerpt }}</p>
@@ -161,7 +205,10 @@
         </div>
     </section>
 
+
+    {{--
     <x-categories :categories="$categories"/>
+    --}}
 
     <livewire:post.all-posts :posts="$posts->slice(3)"/>
 

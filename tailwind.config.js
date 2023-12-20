@@ -24,11 +24,6 @@ export default {
         },
     },
 
-    safelist: [
-        {
-            pattern: /bg-(red|blue|green|yellow|purple)-(500|600)/,
-        },
-    ],
     darkMode: "class",
     plugins: [forms, typography, require('@tailwindcss/aspect-ratio'), require("tw-elements/dist/plugin.cjs")],
 };

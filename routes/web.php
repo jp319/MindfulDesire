@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -19,6 +20,8 @@ use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
 Route::view('/', 'welcome')->name('welcome');
 Route::get('/blog', [PostController::class, 'index'])->name('blog');
 Route::get('/blog/{post:slug}', [PostController::class, 'show'])->name('blog.show');
+Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
+Route::get('/categories/{category:name}', [CategoryController::class, 'show'])->name('categories.show');
 
 Route::middleware([
     'auth:sanctum',

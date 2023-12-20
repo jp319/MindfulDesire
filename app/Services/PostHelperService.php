@@ -36,4 +36,11 @@ class PostHelperService
     {
         return \Str::limit($body, Post::EXCERPT_LENGTH);
     }
+
+    public static function getNumberOfPostsInACategory(string $category_id): int
+    {
+        return Post::whereHas('categories', function ($query) use ($category_id) {
+            $query->where('category_id', $category_id);
+        })->count();
+    }
 }
