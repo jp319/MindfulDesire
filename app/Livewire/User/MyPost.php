@@ -18,6 +18,7 @@ class MyPost extends Component
     public MyPostForm $form;
     public Post $post;
     public Collection $categories;
+    public array $selected_categories = [];
     public bool $show_edit_modal = false;
     public bool $show_unpublish_modal = false;
     public bool $show_publish_modal = false;
@@ -27,6 +28,10 @@ class MyPost extends Component
         $this->form->mount($post);
         $this->post = $post;
         $this->categories = Category::all();
+
+        foreach ($this->post->categories as $category) {
+            $this->selected_categories[] = ''.$category->id;
+        }
     }
     public function editForm(): void
     {

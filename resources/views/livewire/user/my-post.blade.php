@@ -97,9 +97,9 @@
                                                             )
 
                                                         }
-                                                    " x-init="
-                                                        select.setValue('0');
-                                                    " data-te-select-filter="true" data-te-select-placeholder="Categories" multiple>
+                                                    " x-init='
+                                                        select.setValue(@json($selected_categories));
+                                                    ' data-te-select-filter="true" data-te-select-placeholder="Categories" multiple>
                                             <option value="0">Uncategorized</option>
                                             @foreach($categories as $category)
                                             <option value="{{ $category->id }}">{{ $category->name }}</option>
