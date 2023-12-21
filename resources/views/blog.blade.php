@@ -20,84 +20,84 @@
     --}}
 
     @php
-    $post_count = $posts->count();
-    $has_post = $post_count > 0;
-    $post_number = 1;
+        $post_count = $posts->count();
+        $has_post = $post_count > 0;
+        $post_number = 1;
     @endphp
 
     @if(request('author') !== null)
-    @php
-    $author = \App\Models\User::find(request('author'));
-    @endphp
-    <div class="bg-white py-6 sm:py-8 lg:py-12">
-        <div class="mx-auto max-w-screen-2xl px-4 md:px-8">
-            <p class="mb-2 text-center font-semibold text-indigo-500 md:mb-3 lg:text-lg">Viewing</p>
+        @php
+            $author = \App\Models\User::find(request('author'));
+        @endphp
+        <div class="bg-white py-6 sm:py-8 lg:py-12">
+            <div class="mx-auto max-w-screen-2xl px-4 md:px-8">
+                <p class="mb-2 text-center font-semibold text-indigo-500 md:mb-3 lg:text-lg">Viewing</p>
 
-            <h2 class="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-6 lg:text-3xl">{{ $author->name }}'s posts</h2>
+                <h2 class="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-6 lg:text-3xl">{{ $author->name }}'s posts</h2>
 
-            <p class="mx-auto max-w-screen-md text-center text-gray-500 md:text-lg">
-                This is a collection of all the posts created by {{ $author->name }}.
-                <a href="{{ route('blog') }}" class="font-bold text-indigo-500 hover:text-indigo-600 transition duration-150 ease-in-out">Go Back</a>
-            </p>
+                <p class="mx-auto max-w-screen-md text-center text-gray-500 md:text-lg">
+                    This is a collection of all the posts created by {{ $author->name }}.
+                    <a href="{{ route('blog') }}" class="font-bold text-indigo-500 hover:text-indigo-600 transition duration-150 ease-in-out">Go Back</a>
+                </p>
+            </div>
         </div>
-    </div>
     @endif
 
     <section class="bg-transparent">
         <div class="w-full px-5 py-6 mx-auto space-y-5 sm:py-8 md:py-8 sm:space-y-8 md:space-y-16 max-w-7xl relative">
 
             @if($has_post)
-            @php
-            $post = $posts->first();
-            @endphp
-            <!-- Feature -->
-            <div class="flex flex-col items-center sm:px-5 md:flex-row">
-                <div class="w-full md:w-1/2">
-                    <a href="{{ route('blog.show', ['post' => $post->slug]) }}" class="block relative">
-                        <img class="absolute inset-0 -z-10 object-cover w-full h-full rounded-lg max-h-64 sm:max-h-96 blur-md" src="{{ asset('storage/'.$post->image) }}" loading="lazy" alt="Photo by {{ $post->author->name }}">
-                        <img class="object-contain w-full h-full rounded-lg max-h-64 sm:max-h-96" src="{{ asset('storage/'.$post->image) }}" loading="lazy" alt="Photo by {{ $post->author->name }}">
-                    </a>
-                </div>
-                <div class="flex flex-col items-start justify-center w-full h-full py-6 mb-6 md:mb-0 md:w-1/2">
-                    <div class="flex flex-col items-start justify-center h-full space-y-3 transform md:pl-10 lg:pl-16 md:space-y-5">
-                        <div class="bg-pink-500 flex items-center pl-2 pr-3 py-1.5 leading-none rounded-full text-xs font-medium uppercase text-white inline-block">
-                            <svg class="w-3.5 h-3.5 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                            </svg>
-                            <span>Newest</span>
+                @php
+                    $post = $posts->first();
+                @endphp
+                    <!-- Feature -->
+                <div class="flex flex-col items-center sm:px-5 md:flex-row">
+                    <div class="w-full md:w-1/2">
+                        <a href="{{ route('blog.show', ['post' => $post->slug]) }}" class="block relative">
+                            <img class="absolute inset-0 -z-10 object-cover w-full h-full rounded-lg max-h-64 sm:max-h-96 blur-md" src="{{ asset('storage/'.$post->image) }}" loading="lazy" alt="Photo by {{ $post->author->name }}">
+                            <img class="object-contain w-full h-full rounded-lg max-h-64 sm:max-h-96" src="{{ asset('storage/'.$post->image) }}" loading="lazy" alt="Photo by {{ $post->author->name }}">
+                        </a>
+                    </div>
+                    <div class="flex flex-col items-start justify-center w-full h-full py-6 mb-6 md:mb-0 md:w-1/2">
+                        <div class="flex flex-col items-start justify-center h-full space-y-3 transform md:pl-10 lg:pl-16 md:space-y-5">
+                            <div class="bg-pink-500 flex items-center pl-2 pr-3 py-1.5 leading-none rounded-full text-xs font-medium uppercase text-white inline-block">
+                                <svg class="w-3.5 h-3.5 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                </svg>
+                                <span>Newest</span>
+                            </div>
+
+                            <x-category-badge :post="$post" />
+
+                            <h1 class="text-4xl font-bold leading-none lg:text-5xl xl:text-6xl"><a href="{{ route('blog.show', ['post' => $post->slug]) }}">{{ $post->title }}</a></h1>
+                            <p class="pt-2 text-sm font-medium">by <a href="{{ route('blog') }}?author={{ $post->author->id }}" class="mr-1 underline">{{ $post->author->name }}</a> · <span class="mx-1">{{ \App\Services\DateService::formatPublishedAtDate($post->published_at) }}</span>
+                                · <span class="mx-1 text-gray-600">5 min. read</span></p>
                         </div>
-
-                        <x-category-badge :post="$post" />
-
-                        <h1 class="text-4xl font-bold leading-none lg:text-5xl xl:text-6xl"><a href="{{ route('blog.show', ['post' => $post->slug]) }}">{{ $post->title }}</a></h1>
-                        <p class="pt-2 text-sm font-medium">by <a href="{{ route('blog') }}?author={{ $post->author->id }}" class="mr-1 underline">{{ $post->author->name }}</a> · <span class="mx-1">{{ \App\Services\DateService::formatPublishedAtDate($post->published_at) }}</span>
-                            · <span class="mx-1 text-gray-600">5 min. read</span></p>
                     </div>
                 </div>
-            </div>
-            <!-- Feature -->
+                <!-- Feature -->
             @else
-            <!-- Empty -->
-            <div class="w-full sm:container mx-auto">
-                <div class="max-w-4xl ring-2 ring-black ring-opacity-5 mx-auto px-10 bg-white rounded-lg shadow-xl">
-                    <div class="flex flex-col items-center justify-center py-6">
-                        <img src="https://cdn-icons-png.flaticon.com/128/907/907717.png" alt="Welcome Icon" class="w-24 h-24 mb-4">
-                        <h2 class="text-3xl font-semibold mb-2">Welcome to Our App!</h2>
-                        <p class="text-gray-600 text-center text-lg leading-relaxed">Start your journey with us by exploring the amazing features we have to offer:</p>
-                        <ul class="mt-4 text-gray-600 text-center text-base leading-relaxed">
-                            <li class="mb-2"><span class="text-green-500">✔</span> Create and share stunning
-                                content.
-                            </li>
-                            <li class="mb-2"><span class="text-green-500">✔</span> Connect with like-minded users.
-                            </li>
-                            <li class="mb-2"><span class="text-green-500">✔</span> Discover inspiring stories and
-                                ideas.
-                            </li>
-                        </ul>
+                <!-- Empty -->
+                <div class="w-full sm:container mx-auto">
+                    <div class="max-w-4xl ring-2 ring-black ring-opacity-5 mx-auto px-10 bg-white rounded-lg shadow-xl">
+                        <div class="flex flex-col items-center justify-center py-6">
+                            <img src="https://cdn-icons-png.flaticon.com/128/907/907717.png" alt="Welcome Icon" class="w-24 h-24 mb-4">
+                            <h2 class="text-3xl font-semibold mb-2">Welcome to Our App!</h2>
+                            <p class="text-gray-600 text-center text-lg leading-relaxed">Start your journey with us by exploring the amazing features we have to offer:</p>
+                            <ul class="mt-4 text-gray-600 text-center text-base leading-relaxed">
+                                <li class="mb-2"><span class="text-green-500">✔</span> Create and share stunning
+                                    content.
+                                </li>
+                                <li class="mb-2"><span class="text-green-500">✔</span> Connect with like-minded users.
+                                </li>
+                                <li class="mb-2"><span class="text-green-500">✔</span> Discover inspiring stories and
+                                    ideas.
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <!-- Empty -->
+                <!-- Empty -->
             @endif
 
             <div class="isolate pointer-events-none">
@@ -107,36 +107,36 @@
             </div>
 
             @if($post_count > 1)
-            <div class="flex grid grid-cols-12 pb-10 sm:px-5 gap-x-8 gap-y-16">
+                <div class="flex grid grid-cols-12 pb-10 sm:px-5 gap-x-8 gap-y-16">
 
-                @foreach($posts->skip(1) as $post)
-                @php
-                $post_number++;
-                @endphp
+                    @foreach($posts->skip(1) as $post)
+                        @php
+                            $post_number++;
+                        @endphp
 
-                <!-- Big -->
-                <div class="flex flex-col items-start col-span-12 space-y-3 sm:col-span-6 xl:col-span-6">
-                    <a href="{{ route('blog.show', ['post' => $post->slug]) }}" class="block relative">
-                        <img class="absolute inset-0 -z-10 object-cover w-full mb-2 overflow-hidden rounded-lg shadow-sm max-h-96 blur-md" src="{{ asset('storage/'.$post->image) }}" loading="lazy" alt="Photo by {{ $post->author->name }}">
-                        <img class="object-cover w-full mb-2 overflow-hidden rounded-lg shadow-sm max-h-96" src="{{ asset('storage/'.$post->image) }}" loading="lazy" alt="Photo by {{ $post->author->name }}">
-                    </a>
+                            <!-- Big -->
+                        <div class="flex flex-col items-start col-span-12 space-y-3 sm:col-span-6 xl:col-span-6">
+                            <a href="{{ route('blog.show', ['post' => $post->slug]) }}" class="block relative">
+                                <img class="absolute inset-0 -z-10 object-cover w-full mb-2 overflow-hidden rounded-lg shadow-sm max-h-96 blur-md" src="{{ asset('storage/'.$post->image) }}" loading="lazy" alt="Photo by {{ $post->author->name }}">
+                                <img class="object-cover w-full mb-2 overflow-hidden rounded-lg shadow-sm max-h-96" src="{{ asset('storage/'.$post->image) }}" loading="lazy" alt="Photo by {{ $post->author->name }}">
+                            </a>
 
-                    <x-category-badge :post="$post" />
+                            <x-category-badge :post="$post" />
 
-                    <h2 class="text-lg font-bold sm:text-xl md:text-2xl"><a href="{{ route('blog.show', ['post' => $post->slug]) }}">{{ $post->title }}</a></h2>
-                    <p class="text-sm text-gray-500">{{ $post->excerpt }}</p>
-                    <p class="pt-2 text-xs font-medium"><a href="{{ route('blog') }}?author={{ $post->author->id }}" class="mr-1 underline">{{ $post->author->name }}</a>
-                        · <span class="mx-1">{{ \App\Services\DateService::formatPublishedAtDate($post->published_at) }}</span>
-                        · <span class="mx-1 text-gray-600">3 min. read</span></p>
+                            <h2 class="text-lg font-bold sm:text-xl md:text-2xl"><a href="{{ route('blog.show', ['post' => $post->slug]) }}">{{ $post->title }}</a></h2>
+                            <p class="text-sm text-gray-500">{{ $post->excerpt }}</p>
+                            <p class="pt-2 text-xs font-medium"><a href="{{ route('blog') }}?author={{ $post->author->id }}" class="mr-1 underline">{{ $post->author->name }}</a>
+                                · <span class="mx-1">{{ \App\Services\DateService::formatPublishedAtDate($post->published_at) }}</span>
+                                · <span class="mx-1 text-gray-600">3 min. read</span></p>
+                        </div>
+                        <!-- Big -->
+
+                        @if($post_number == 3)
+                            @break
+                        @endif
+                    @endforeach
+
                 </div>
-                <!-- Big -->
-
-                @if($post_number == 3)
-                @break
-                @endif
-                @endforeach
-
-            </div>
             @endif
 
             <div class="isolate pointer-events-none">

@@ -335,15 +335,15 @@
                             <a href="{{ route('categories') }}" class="{{ request()->routeIs('categories')? 'text-black' : 'text-gray-700' }} inline-block w-full py-2 mx-0      font-medium text-left md:w-auto md:px-0 md:mx-2 hover:text-black lg:mx-3 md:text-center">Categories</a>
 
                             @auth
-                            <a href="{{ route('profile.posts') }}" class="{{ request()->routeIs('profile.posts')    ? 'text-black' : 'text-gray-700' }} inline-block w-full py-2 mx-0      font-medium text-left md:w-auto md:px-0 md:mx-2 hover:text-black lg:mx-3 md:text-center">My Posts</a>
+                                <a href="{{ route('profile.posts') }}" class="{{ request()->routeIs('profile.posts')    ? 'text-black' : 'text-gray-700' }} inline-block w-full py-2 mx-0      font-medium text-left md:w-auto md:px-0 md:mx-2 hover:text-black lg:mx-3 md:text-center">My Posts</a>
                             @endauth
 
                             @guest
-                            <x-register-and-login-modal />
+                                <x-register-and-login-modal />
                             @endguest
 
                             @auth
-                            <x-upload-post-modal />
+                                <x-upload-post-modal />
                             @endauth
 
                             {{--
@@ -392,22 +392,22 @@
                         </div>
                         <div class="flex flex-col items-start justify-end w-full md:items-center md:w-1/3 md:flex-row md:py-0">
                             @guest
-                            <x-register-or-login-modal />
+                                <x-register-or-login-modal />
                             @endguest
                             @auth
-                            <div class="w-full px-2 py-2 flex justify-start sm:justify-end">
-                                <a href="{{ route('profile') }}" class="group block flex-shrink-0">
-                                    <div class="flex flex-row-reverse items-center sm:flex-row">
-                                        <div>
-                                            <p class="text-sm font-medium text-gray-700 group-hover:text-gray-900 text-left sm:text-right">{{ auth()->user()->name }}</p>
-                                            <p class="text-xs font-medium text-gray-500 group-hover:text-gray-700 text-left sm:text-right">View profile</p>
+                                <div class="w-full px-2 py-2 flex justify-start sm:justify-end">
+                                    <a href="{{ route('profile') }}" class="group block flex-shrink-0">
+                                        <div class="flex flex-row-reverse items-center sm:flex-row">
+                                            <div>
+                                                <p class="text-sm font-medium text-gray-700 group-hover:text-gray-900 text-left sm:text-right">{{ auth()->user()->name }}</p>
+                                                <p class="text-xs font-medium text-gray-500 group-hover:text-gray-700 text-left sm:text-right">View profile</p>
+                                            </div>
+                                            <div class="mr-3 sm:ml-3">
+                                                <img class="inline-block h-14 w-14 rounded-full" src="{{ auth()->user()->profile_photo_url }}" alt="">
+                                            </div>
                                         </div>
-                                        <div class="mr-3 sm:ml-3">
-                                            <img class="inline-block h-14 w-14 rounded-full" src="{{ auth()->user()->profile_photo_url }}" alt="">
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
+                                    </a>
+                                </div>
                             @endauth
                         </div>
                     </div>

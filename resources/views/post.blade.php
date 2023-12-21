@@ -2,11 +2,13 @@
 
     <x-header sticky="{{ false }}" />
 
-    @if($post->author->id == auth()->user()->id)
+    @auth
+        @if($post->author->id == auth()->user()->id)
 
-    <livewire:user.my-post :post="$post" />
+            <livewire:user.my-post :post="$post" />
 
-    @endif
+        @endif
+    @endauth
 
     <div class="bg-transparent py-6 sm:py-8 lg:pt-6 lg:pb-12">
         <div class="mx-auto max-w-screen-xl px-4 md:px-8">
@@ -31,6 +33,8 @@
             </div>
         </div>
     </div>
+
+    <livewire:user.comment :post="$post" />
 
     <x-footer />
 </x-guest-layout>
