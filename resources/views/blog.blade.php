@@ -66,6 +66,9 @@
                             </svg>
                             <span>Newest</span>
                         </div>
+
+                        <x-category-badge :post="$post" />
+
                         <h1 class="text-4xl font-bold leading-none lg:text-5xl xl:text-6xl"><a href="{{ route('blog.show', ['post' => $post->slug]) }}">{{ $post->title }}</a></h1>
                         <p class="pt-2 text-sm font-medium">by <a href="{{ route('blog') }}?author={{ $post->author->id }}" class="mr-1 underline">{{ $post->author->name }}</a> · <span class="mx-1">{{ \App\Services\DateService::formatPublishedAtDate($post->published_at) }}</span>
                             · <span class="mx-1 text-gray-600">5 min. read</span></p>
@@ -118,17 +121,7 @@
                         <img class="object-cover w-full mb-2 overflow-hidden rounded-lg shadow-sm max-h-96" src="{{ asset('storage/'.$post->image) }}" loading="lazy" alt="Photo by {{ $post->author->name }}">
                     </a>
 
-                    <div class="w-full flex flex-wrap gap-2">
-                        @forelse($post->categories as $category)
-                        <div class="flex items-center px-3 py-1.5 leading-none rounded-full text-xs font-medium uppercase text-white inline-block" style="background-color: {{ $category->color }};">
-                            <span>{{ $category->name }}</span>
-                        </div>
-                        @empty
-                        <div class="bg-gray-500 flex items-center px-3 py-1.5 leading-none rounded-full text-xs font-medium uppercase text-white inline-block">
-                            <span>Uncategorized</span>
-                        </div>
-                        @endforelse
-                    </div>
+                    <x-category-badge :post="$post" />
 
                     <h2 class="text-lg font-bold sm:text-xl md:text-2xl"><a href="{{ route('blog.show', ['post' => $post->slug]) }}">{{ $post->title }}</a></h2>
                     <p class="text-sm text-gray-500">{{ $post->excerpt }}</p>

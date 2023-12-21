@@ -22,10 +22,11 @@ class CategoryController extends Controller
      */
     public function show(string $slug)
     {
-        $name = Category::where('slug', $slug)->firstOrFail()->name;
+        $name = $slug;
         if ($slug === 'uncategorized') {
             $posts = Post::whereDoesntHave('categories')->get();
         } else {
+            $name = Category::where('slug', $slug)->firstOrFail()->name;
             $posts = Post::whereHas('categories', function ($query) use ($slug) {
                 $query->where('slug', $slug);
             })->get();
