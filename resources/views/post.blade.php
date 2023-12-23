@@ -27,7 +27,6 @@
 
                     <p class=" mb-6 text-gray-600 sm:text-lg md:mb-8 p-3 text-justify indent-10">
                         {{ $post->body }}
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum ut atque dolores quisquam qui, incidunt alias nesciunt veniam nisi tempore obcaecati voluptates sequi delectus maiores consectetur vitae modi consequatur fugiat!
                     </p>
                 </div>
             </div>
